@@ -1,0 +1,225 @@
+[
+    {
+        "id": "facility",
+        "name": "Facility",
+        "term": "Idle Megawatts",
+        "color": "#1B4D3E",
+        "observed": "El operador ve medidores de consumo eléctrico marcando 40% de capacidad utilizada en horas pico, pero el PUE (Power Usage Effectiveness) indica que el 60% restante se pierde en transformación y refrigeración ineficiente. Los pasillos fríos operan 4°C por debajo de los requisitos del SLA a pesar de que la utilización real de servidores es baja. Las CRAC (Computer Room Air Conditioning units) funcionan a régimen completo durante la madrugada, cuando la carga térmica real es una fracción de la capacidad de diseño.",
+        "cost": {
+            "headline": "$2.4M",
+            "unit": "anuales por MW desperdiciado",
+            "breakdown": [
+                {
+                    "label": "Energía de cooling sin carga útil",
+                    "share": 0.50,
+                    "amount": "$1.20M"
+                },
+                {
+                    "label": "Sobredimensionamiento de UPS y PDUs",
+                    "share": 0.30,
+                    "amount": "$0.72M"
+                },
+                {
+                    "label": "Mantenimiento de refrigeración sobredimensionada",
+                    "share": 0.20,
+                    "amount": "$0.48M"
+                }
+            ]
+        },
+        "rootCause": "Diseño de cooling sobredimensionado basado en proyecciones de densidad que nunca se materializaron. Falta de monitoreo granular: los sensores de temperatura operan con setpoints estáticos, completamente ciegos a la telemetría real de los workloads. Los loops de refrigeración no tienen feedback loop con la capa de orquestación de cargas.",
+        "metrics": [
+            {
+                "label": "PUE",
+                "typical": "1.8 – 2.2",
+                "efficient": "1.2 – 1.4",
+                "chartable": true
+            },
+            {
+                "label": "Delta T pasillo frío",
+                "typical": "4°C bajo SLA",
+                "efficient": "Dentro de SLA",
+                "chartable": false
+            },
+            {
+                "label": "Utilización de CRAC",
+                "typical": "85–100%",
+                "efficient": "40–60%",
+                "chartable": true
+            },
+            {
+                "label": "Carga UPS real vs. nominal",
+                "typical": "30–40%",
+                "efficient": "65–80%",
+                "chartable": true
+            }
+        ],
+        "utilization": [
+            {
+                "label": "Capacidad eléctrica",
+                "provisioned": 100,
+                "used": 40,
+                "unit": "%"
+            }
+        ]
+    },
+    {
+        "id": "it",
+        "name": "IT",
+        "term": "Dark Silicon",
+        "color": "#2C5F7C",
+        "observed": "El operador ve racks con LEDs de actividad parpadeando en verde, sugiriendo operación normal. Pero las métricas de utilización muestran CPUs al 12-18% de capacidad real. Servidores con 256 GB de RAM donde solo 40 GB están siendo tocados por los procesos activos. Puertos de red a 100 Gbps con throughput real de 8 Gbps. Almacenamiento NVMe con IOPS provisionados para 500K operaciones por segundo que nunca supera las 60K.",
+        "cost": {
+            "headline": "$1.1M",
+            "unit": "anuales por cada 100 racks con silicon oscuro",
+            "breakdown": [
+                {
+                    "label": "Energía de hardware idle",
+                    "share": 0.40,
+                    "amount": "$0.44M"
+                },
+                {
+                    "label": "Licencias por capacidad no utilizada",
+                    "share": 0.25,
+                    "amount": "$0.275M"
+                },
+                {
+                    "label": "Espacio en piso elevado",
+                    "share": 0.20,
+                    "amount": "$0.22M"
+                },
+                {
+                    "label": "Ciclos de refresh de hardware subutilizado",
+                    "share": 0.15,
+                    "amount": "$0.165M"
+                }
+            ]
+        },
+        "rootCause": "Ciclos de procurement desconectados de la demanda real de workloads. Se compra para picos históricos que nunca se repiten. Over-provisioning como seguro contra incidentes, sin mecanismos de liberación dinámica de recursos. Los equipos de infraestructura IT y los equipos de workloads operan con visibilidad mutua limitada: IT provisiona capacidad, workloads la consumen de forma irregular, y nadie mide la brecha entre ambos.",
+        "metrics": [
+            {
+                "label": "Utilización CPU",
+                "typical": "12–18%",
+                "efficient": "55–70%",
+                "chartable": true
+            },
+            {
+                "label": "Utilización RAM",
+                "typical": "15–25%",
+                "efficient": "60–75%",
+                "chartable": true
+            },
+            {
+                "label": "Throughput de red vs. capacidad",
+                "typical": "5–10%",
+                "efficient": "40–60%",
+                "chartable": true
+            },
+            {
+                "label": "IOPS reales vs. provisionados",
+                "typical": "10–15%",
+                "efficient": "50–70%",
+                "chartable": true
+            }
+        ],
+        "utilization": [
+            {
+                "label": "CPU",
+                "provisioned": 100,
+                "used": 15,
+                "unit": "%"
+            },
+            {
+                "label": "RAM",
+                "provisioned": 256,
+                "used": 40,
+                "unit": "GB"
+            },
+            {
+                "label": "Red",
+                "provisioned": 100,
+                "used": 8,
+                "unit": "Gbps"
+            },
+            {
+                "label": "Almacenamiento (IOPS)",
+                "provisioned": 500000,
+                "used": 60000,
+                "unit": "IOPS"
+            }
+        ]
+    },
+    {
+        "id": "workload",
+        "name": "Workload",
+        "term": "Ghost Work",
+        "color": "#7C5C2C",
+        "observed": "El operador ve jobs de entrenamiento de ML que esperan 4-6 horas en cola mientras GPUs A100 reservadas permanecen idle al 95%. El scheduler asigna recursos por proyecto en vez de por demanda real. Workloads batch que corren en horarios de pico eléctrico cuando podrían correr en valle. Reservas de GPUs con ventanas de 8 horas donde el trabajo efectivo dura 90 minutos. Colas de inferencia que se acumulan detrás de jobs de entrenamiento de baja prioridad que nunca se preemptan.",
+        "cost": {
+            "headline": "$3.2M",
+            "unit": "anuales por cada cluster de 500 GPUs con patrones de ghost work",
+            "breakdown": [
+                {
+                    "label": "GPUs reservadas ociosas (compute)",
+                    "share": 0.53,
+                    "amount": "$1.70M"
+                },
+                {
+                    "label": "Energía de GPUs en idle",
+                    "share": 0.14,
+                    "amount": "$0.45M"
+                },
+                {
+                    "label": "Costo de oportunidad de workloads no ejecutados",
+                    "share": 0.21,
+                    "amount": "$0.67M"
+                },
+                {
+                    "label": "Penalizaciones por SLA incumplidos",
+                    "share": 0.12,
+                    "amount": "$0.38M"
+                }
+            ]
+        },
+        "rootCause": "Políticas de scheduling estáticas sin feedback loop con la telemetría del facility. Asignación por reservación sin mecanismos de release automático. Desconexión entre el orquestador de workloads (Kubernetes, Slurm, custom schedulers) y la capa de energía/cooling: el scheduler no sabe que correr un job a las 3 AM reduce el costo de cooling un 22% porque la temperatura ambiente es menor. Los equipos de ML reservan recursos \"por si acaso\" y no los liberan.",
+        "metrics": [
+            {
+                "label": "Utilización GPU",
+                "typical": "5–15%",
+                "efficient": "60–80%",
+                "chartable": true
+            },
+            {
+                "label": "Tiempo en cola vs. ejecución",
+                "typical": "4:1",
+                "efficient": "0.5:1",
+                "chartable": false
+            },
+            {
+                "label": "Ventana de reserva vs. uso efectivo",
+                "typical": "8h / 90min",
+                "efficient": "2h / 100min",
+                "chartable": false
+            },
+            {
+                "label": "Workloads en pico eléctrico",
+                "typical": "70–80%",
+                "efficient": "20–30%",
+                "chartable": true
+            }
+        ],
+        "utilization": [
+            {
+                "label": "GPU",
+                "provisioned": 100,
+                "used": 10,
+                "unit": "%"
+            },
+            {
+                "label": "Ventana de reserva",
+                "provisioned": 480,
+                "used": 90,
+                "unit": "min"
+            }
+        ]
+    }
+]

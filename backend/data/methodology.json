@@ -1,0 +1,53 @@
+{
+    "framework": {
+        "name": "Three-Layer Decomposition Model (TLDM)",
+        "owner": "PhysaFlow",
+        "description": "Framework de análisis que descompone la stranded capacity en tres capas operativas independientes pero interrelacionadas; cada capa se mide por separado y luego se cruzan los datos para identificar fallas de coordinación entre capas, donde se origina la mayor parte de la stranded capacity.",
+        "layers": [
+            {
+                "id": "facility",
+                "name": "Facility",
+                "scope": "Capa física de energía y refrigeración"
+            },
+            {
+                "id": "it",
+                "name": "IT",
+                "scope": "Infraestructura de cómputo, red y almacenamiento"
+            },
+            {
+                "id": "workload",
+                "name": "Workload",
+                "scope": "Orquestación y scheduling de cargas"
+            }
+        ]
+    },
+    "measurement": [
+        {
+            "source": "Sensores de facility (PUE, CRAC, UPS, PDUs)",
+            "measures": "Consumo energético, eficiencia de cooling, capacidad eléctrica",
+            "layer": "facility"
+        },
+        {
+            "source": "APIs de utilización de activos IT (IPMI, Redfish, SNMP)",
+            "measures": "CPU, RAM, red, almacenamiento por rack",
+            "layer": "it"
+        },
+        {
+            "source": "Logs de schedulers (Slurm, Kubernetes, custom)",
+            "measures": "Colas, reservas, utilización GPU, ventanas de ejecución",
+            "layer": "workload"
+        }
+    ],
+    "dataSources": [
+        "Telemetría anonimizada de operadores de data centers (muestra representativa, no exhaustiva)",
+        "Benchmarks de industria: Uptime Institute Annual Survey, ASHRAE TC 9.9",
+        "Bases de datos públicas de PUE (Google, Microsoft, Meta transparency reports)",
+        "Entrevistas con operadores de facility y equipos de ML infrastructure"
+    ],
+    "period": "Q1–Q2 2026",
+    "limitations": [
+        "Los datos se basan en una muestra representativa, no en un censo de la industria.",
+        "Las cifras de costo son estimaciones basadas en precios de mercado de cloud público y costos operativos reportados; los costos reales varían según geografía, contrato y escala.",
+        "La taxonomía es una primera aproximación. Se espera que evolucione con datos adicionales y feedback de la comunidad de operadores."
+    ]
+}
