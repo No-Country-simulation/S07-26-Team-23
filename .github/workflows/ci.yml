@@ -1,0 +1,62 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [production, main]
+  pull_request:
+    branches: [production, main]
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies (Frontend)
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Lint and Typecheck (Frontend)
+        run: |
+          cd frontend
+          npm run lint
+          npx tsc --noEmit
+
+      - name: Build (Frontend)
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Validate JSON files (Backend)
+        run: |
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+            const dir = "backend/data";
+            if (fs.existsSync(dir)) {
+              fs.readdirSync(dir).forEach(file => {
+                if (file.endsWith(".json")) {
+                  const filePath = path.join(dir, file);
+                  const content = fs.readFileSync(filePath, "utf8");
+                  try {
+                    JSON.parse(content);
+                    console.log(`✅ Valid JSON: ${file}`);
+                  } catch (e) {
+                    console.error(`❌ Invalid JSON in ${file}:`, e.message);
+                    process.exit(1);
+                  }
+                }
+              });
+            } else {
+              console.log("No backend/data directory found, skipping.");
+            }
+          '
