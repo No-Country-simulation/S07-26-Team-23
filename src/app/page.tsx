@@ -1,65 +1,84 @@
-import Image from "next/image";
+import LayerBadge from "./components/LayerBadge";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <article className="flex flex-col gap-12 pb-32">
+      <header>
+        <span className="font-mono text-xs text-[var(--color-brand-accent)] uppercase font-semibold">
+          PhysaFlow — Stranded Capacity Index
+        </span>
+        <h1 className="text-4xl font-serif font-bold text-[var(--color-brand-primary)] mt-2">
+          Contenido del Reporte
+        </h1>
+        <p className="text-[var(--color-text-secondary)] mt-2 text-lg">
+          Definiendo el vocabulario de la industria sobre la capacidad no utilizada en data centers.
+        </p>
+      </header>
+
+      <hr className="border-[var(--color-border-default)] my-2" />
+
+      <section id="introduccion" className="flex flex-col gap-3 min-h-[250px]">
+        <h2 className="text-2xl font-serif font-bold text-[var(--color-brand-primary)]">
+          1. Introducción
+        </h2>
+        <p className="text-[var(--color-text-primary)] leading-relaxed">
+          La industria de los data centers enfrenta una paradoja: una proporción significativa de la capacidad instalada no produce salida computacional útil.
+        </p>
+      </section>
+
+      <section id="facility" className="flex flex-col gap-3 min-h-[250px]">
+        <div className="flex items-center gap-3">
+          <h2 className="text-2xl font-serif font-bold text-[var(--color-layer-facility)]">
+            2. Capa Facility
+          </h2>
+          <LayerBadge type="facility" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <p className="text-[var(--color-text-primary)] leading-relaxed">
+          Análisis de la infraestructura física, energía, refrigeración y limitaciones de espacio en las instalaciones.
+        </p>
+      </section>
+
+      <section id="it" className="flex flex-col gap-3 min-h-[250px]">
+        <div className="flex items-center gap-3">
+          <h2 className="text-2xl font-serif font-bold text-[var(--color-layer-it)]">
+            3. Capa IT
+          </h2>
+          <LayerBadge type="it" />
         </div>
-      </main>
-    </div>
+        <p className="text-[var(--color-text-primary)] leading-relaxed">
+          Evaluación de servidores, switches de red, almacenamiento y tasa de utilización de hardware.
+        </p>
+      </section>
+
+      <section id="workload" className="flex flex-col gap-3 min-h-[250px]">
+        <div className="flex items-center gap-3">
+          <h2 className="text-2xl font-serif font-bold text-[var(--color-layer-workload)]">
+            4. Capa Workload
+          </h2>
+          <LayerBadge type="workload" />
+        </div>
+        <p className="text-[var(--color-text-primary)] leading-relaxed">
+          Monitoreo de cargas de trabajo, orquestación de máquinas virtuales y optimización de procesamiento.
+        </p>
+      </section>
+
+      <section id="metodologia" className="flex flex-col gap-3 min-h-[250px]">
+        <h2 className="text-2xl font-serif font-bold text-[var(--color-brand-primary)]">
+          5. Metodología
+        </h2>
+        <p className="text-[var(--color-text-primary)] leading-relaxed">
+          Descripción de la recolección de datos y cálculo del Stranded Capacity Index (SCI).
+        </p>
+      </section>
+
+      <section id="citas" className="flex flex-col gap-3 min-h-[250px]">
+        <h2 className="text-2xl font-serif font-bold text-[var(--color-brand-primary)]">
+          6. Cómo citar
+        </h2>
+        <p className="text-[var(--color-text-primary)] font-mono text-xs bg-[var(--color-bg-subtle)] p-4 rounded border border-[var(--color-border-default)]">
+          PhysaFlow (2026). Stranded Capacity Index Report.
+        </p>
+      </section>
+    </article>
   );
 }
