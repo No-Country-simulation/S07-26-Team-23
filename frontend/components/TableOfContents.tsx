@@ -37,7 +37,7 @@ export default function TableOfContents() {
         paddingRight: "24px",
       }}
     >
-      <nav className="flex flex-col gap-4 text-sm font-sans">
+      <nav className="flex flex-col gap-4 text-sm">
         <span className="font-serif font-bold text-lg text-[var(--color-brand-primary)]">
           PhysaFlow
         </span>

@@ -13,7 +13,10 @@ export default function ReporteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-1 bg-[var(--color-bg-page)] text-[var(--color-text-primary)] font-sans">
+    <div
+      className="flex flex-1 bg-[var(--color-bg-page)] text-[var(--color-text-primary)]"
+      style={{ fontFamily: "'Inter', sans-serif" }}
+    >
       <TableOfContents />
       <main className="flex-1 flex justify-center">
         <div
