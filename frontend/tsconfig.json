@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+    /*"baseUrl": ".",
+    "paths": {
+      "react": ["./node_modules/react"],
+      "react/jsx-runtime": ["./node_modules/react/jsx-runtime"]
+    },*/
+    "noResolve": false,
+    "typeRoots": ["./node_modules/@types"],
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
