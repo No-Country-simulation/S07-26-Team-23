@@ -1,4 +1,4 @@
-/* eslint-env node */
+/* global process, console */
 
 import fs from 'fs';
 import path from 'path';
