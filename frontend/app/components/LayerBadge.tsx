@@ -25,7 +25,7 @@ export default function LayerBadge({ type, label }: LayerBadgeProps) {
 
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-medium border ${config.className}`}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono font-medium border ${config.className}`}
     >
       {label || config.name}
     </span>

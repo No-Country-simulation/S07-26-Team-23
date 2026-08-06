@@ -1,53 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Tipografías */
+  --font-serif: 'Source Serif 4', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
 
-  /* Tokens del reporte (/reporte) — Figma "Design Tokens" */
-  --font-serif: 'Source Serif 4', serif; /* Headings/Editorial: H1, H2, report title */
-  /* Body/Interface (Inter) se aplica solo dentro de /reporte, ver reporte/layout.tsx */
+  /* Colores de Marca */
+  --color-brand-primary: #1B4D3E;  /* Forest Green */
+  --color-brand-accent: #C9A84C;   /* Gold */
 
-  --color-brand-primary: #1B4D3E; /* Forest Green — brand, capa Facility, headers */
-  --color-brand-accent: #C9A84C; /* Gold — reglas, highlights, bordes de énfasis */
-
+  /* Capas Semánticas */
   --color-layer-facility: #1B4D3E;
   --color-layer-it: #2C5F7C;
   --color-layer-workload: #7C5C2C;
 
-  /* Neutrales — "Document Air" */
-  --color-text-primary: #1A1A18; /* Ink */
-  --color-text-charcoal: #2D2D2A;
+  /* Textos */
+  --color-text-primary: #1A1A18;   /* Ink */
   --color-text-secondary: #4A4A47; /* Slate */
-  --color-text-stone: #8A8A85;
 
+  /* Bordes y Fondos */
   --color-border-default: #D3D1C7; /* Mist */
-  --color-bg-subtle: #F1EFE8; /* Cloud */
-  --color-bg-page: #FAFAF8; /* Page */
+  --color-bg-page: #FAFAFA;        /* Page background */
+  --color-bg-subtle: #F1EFE8;      /* Cloud background */
 
-  /* Radio de bordes: solo 2/4/8px — sin cards de 16-24px ni paneles flotantes */
+  /* Radio de Bordes (Restricción de UX) */
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 8px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
 }
