@@ -1,4 +1,5 @@
 import LayerBadge from "./components/LayerBadge";
+import CitationBlock from "./components/CitationBlock/CitationBlock";
 
 export default function Home() {
   return (
