@@ -1,5 +1,6 @@
 import LayerBadge from "@/components/LayerBadge";
 import { getReportSections } from "@/lib/content";
+import TableOfContents from "@/components/TableOfContents";
 
 const LAYER_BY_SECTION: Record<string, "facility" | "it" | "workload"> = {
   facility: "facility",
@@ -20,6 +21,7 @@ export default function ReportePage() {
 
   return (
     <article className="flex flex-col gap-12 pb-32">
+      <TableOfContents />
       <header>
         <span className="font-mono text-xs text-[var(--color-brand-accent)] uppercase font-semibold">
           PhysaFlow — Stranded Capacity Index
