@@ -3,8 +3,22 @@ import TableOfContents from "./components/TableOfContents";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PhysaFlow — Stranded Capacity Index",
+  metadataBase: new URL("https://physaflow.com"),
+  title: "PhysaFlow – Stranded Capacity Index",
   description: "Reporte de referencia de la industria sobre la capacidad varada en data centers.",
+  openGraph: {
+    title: "PhysaFlow – Stranded Capacity Index",
+    description: "Reporte de referencia de la industria sobre la capacidad varada en data centers.",
+    url: "https://physaflow.com",
+    siteName: "PhysaFlow Stranded Capacity Index",
+    locale: "es_ES",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PhysaFlow – Stranded Capacity Index",
+    description: "Reporte de referencia de la industria sobre la capacidad varada en data centers.",
+  },
 };
 
 export default function RootLayout({
@@ -12,8 +26,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Report',
+    name: 'PhysaFlow Stranded Capacity Index',
+    description: 'Reporte de referencia de la industria sobre la capacidad varada en data centers.',
+    author: {
+      '@type': 'Organization',
+      name: 'PhysaFlow',
+    },
+  };
+
   return (
     <html lang="es" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-screen flex antialiased">
         {/* Aquí ponemos nuestro menú lateral dinámico */}
         <TableOfContents />
