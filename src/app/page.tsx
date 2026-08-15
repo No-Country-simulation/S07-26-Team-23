@@ -1,5 +1,6 @@
 import LayerBadge from "./components/LayerBadge";
 import CitationBlock from "./components/CitationBlock/CitationBlock";
+import TaxonomyChart from "./components/TaxonomyChart/TaxonomyChart";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         </p>
       </header>
 
+<TaxonomyChart />
       <hr className="border-[var(--color-border-default)] my-2" />
 
       <section id="introduccion" className="flex flex-col gap-3 min-h-[250px]">
