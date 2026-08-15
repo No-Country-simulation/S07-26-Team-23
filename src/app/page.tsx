@@ -78,9 +78,12 @@ export default function Home() {
         <h2 className="text-2xl font-serif font-bold text-[var(--color-brand-primary)]">
           6. Cómo citar
         </h2>
-        <p className="text-[var(--color-text-primary)] font-mono text-xs bg-[var(--color-bg-subtle)] p-4 rounded border border-[var(--color-border-default)]">
-          PhysaFlow (2026). Stranded Capacity Index Report.
-        </p>
+       <CitationBlock 
+  author="PhysaFlow Team"
+  year="2026"
+  title="PhysaFlow - Stranded Capacity Index"
+  url="https://physaflow.com"
+/>
       </section>
     </article>
   );
