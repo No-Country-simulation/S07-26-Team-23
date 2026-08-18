@@ -104,8 +104,10 @@ const LayerReportPDF = ({ layer }) => (
                 React.createElement(
                     View,
                     { style: styles.section },
-                    React.createElement(Text, { style: styles.sectionTitle }, 'Causa Raíz'),
-                    React.createElement(Text, { style: styles.text }, layer.rootCause)
+                    React.createElement(Text, { style: styles.sectionTitle }, 'Causas Raíz'),
+                    ...layer.rootCauses.map((cause, index) =>
+                        React.createElement(Text, { key: index, style: styles.text }, `• ${cause}`)
+                    )
                 )
             ),
             // Atribución obligatoria en el pie de página

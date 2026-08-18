@@ -2,8 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import { TaxonomyLayer, MethodologyData, CitationsData } from './types';
 
-// Ruta absoluta hacia la carpeta data en la raíz del proyecto
-const dataDirectory = path.join(process.cwd(), 'data');
+// Ruta absoluta hacia backend/data (fuente única de verdad, compartida con
+// el pipeline de generación de PDFs en scripts/generate-pdf.mjs)
+const dataDirectory = path.join(process.cwd(), '..', 'backend', 'data');
 
 /**
  * Obtiene la taxonomía completa de las 3 capas (Facility, IT, Workload)

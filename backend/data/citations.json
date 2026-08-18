@@ -1,11 +1,11 @@
 {
-    "academic": "PhysaFlow Research. (2026). The Stranded Capacity Index: A Unified Taxonomy of Datacenter Infrastructure Waste. PhysaFlow. https://physaflow.com/stranded-capacity-index",
-    "journalistic": "\"The Stranded Capacity Index: A Unified Taxonomy of Datacenter Infrastructure Waste,\" PhysaFlow Research, 2026. [Online]. Disponible en: https://physaflow.com/stranded-capacity-index",
-    "attribution": "Source: PhysaFlow Stranded Capacity Index",
-    "meta": {
-        "author": "PhysaFlow Research",
-        "year": 2026,
-        "title": "The Stranded Capacity Index: A Unified Taxonomy of Datacenter Infrastructure Waste",
-        "url": "https://physaflow.com/stranded-capacity-index"
-    }
+  "academic": "Investigación PhysaFlow (2026). Índice de Capacidad Varada (Stranded Capacity Index). PhysaFlow Stranded Capacity Index. https://physaflow.com/reporte",
+  "journalistic": "Investigación PhysaFlow (2026), \"Índice de Capacidad Varada\", PhysaFlow Stranded Capacity Index, disponible en https://physaflow.com/reporte.",
+  "attribution": "Al citar este reporte, por favor atribuir a \"PhysaFlow Stranded Capacity Index\" e incluir un enlace a la fuente original.",
+  "meta": {
+    "author": "Investigación PhysaFlow",
+    "year": 2026,
+    "title": "Índice de Capacidad Varada",
+    "url": "https://physaflow.com/reporte"
+  }
 }

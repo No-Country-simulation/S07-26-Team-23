@@ -1,225 +1,149 @@
 [
-    {
-        "id": "facility",
-        "name": "Facility",
-        "term": "Idle Megawatts",
-        "color": "#1B4D3E",
-        "observed": "El operador ve medidores de consumo eléctrico marcando 40% de capacidad utilizada en horas pico, pero el PUE (Power Usage Effectiveness) indica que el 60% restante se pierde en transformación y refrigeración ineficiente. Los pasillos fríos operan 4°C por debajo de los requisitos del SLA a pesar de que la utilización real de servidores es baja. Las CRAC (Computer Room Air Conditioning units) funcionan a régimen completo durante la madrugada, cuando la carga térmica real es una fracción de la capacidad de diseño.",
-        "cost": {
-            "headline": "$2.4M",
-            "unit": "anuales por MW desperdiciado",
-            "breakdown": [
-                {
-                    "label": "Energía de cooling sin carga útil",
-                    "share": 0.50,
-                    "amount": "$1.20M"
-                },
-                {
-                    "label": "Sobredimensionamiento de UPS y PDUs",
-                    "share": 0.30,
-                    "amount": "$0.72M"
-                },
-                {
-                    "label": "Mantenimiento de refrigeración sobredimensionada",
-                    "share": 0.20,
-                    "amount": "$0.48M"
-                }
-            ]
-        },
-        "rootCause": "Diseño de cooling sobredimensionado basado en proyecciones de densidad que nunca se materializaron. Falta de monitoreo granular: los sensores de temperatura operan con setpoints estáticos, completamente ciegos a la telemetría real de los workloads. Los loops de refrigeración no tienen feedback loop con la capa de orquestación de cargas.",
-        "metrics": [
-            {
-                "label": "PUE",
-                "typical": "1.8 – 2.2",
-                "efficient": "1.2 – 1.4",
-                "chartable": true
-            },
-            {
-                "label": "Delta T pasillo frío",
-                "typical": "4°C bajo SLA",
-                "efficient": "Dentro de SLA",
-                "chartable": false
-            },
-            {
-                "label": "Utilización de CRAC",
-                "typical": "85–100%",
-                "efficient": "40–60%",
-                "chartable": true
-            },
-            {
-                "label": "Carga UPS real vs. nominal",
-                "typical": "30–40%",
-                "efficient": "65–80%",
-                "chartable": true
-            }
-        ],
-        "utilization": [
-            {
-                "label": "Capacidad eléctrica",
-                "provisioned": 100,
-                "used": 40,
-                "unit": "%"
-            }
-        ]
+  {
+    "id": "facility",
+    "name": "Instalaciones",
+    "term": "Idle Megawatts",
+    "translation": "Megavatios inactivos",
+    "color": "#1B4D3E",
+    "tag": "FACILITY",
+    "code": "FAC-001",
+    "observed": "Capacidad de energía y refrigeración disponible en términos nominales que no puede convertirse en carga TI utilizable.",
+    "cost": {
+      "headline": "US$ 2,4 M",
+      "unit": "anuales por MW desperdiciado · Estimación del contenido de proyecto.",
+      "breakdown": [
+        { "label": "Capacidad eléctrica contratada sin uso", "share": 0.52, "amount": "US$ 1,25 M" },
+        { "label": "Refrigeración sobredimensionada", "share": 0.31, "amount": "US$ 0,74 M" },
+        { "label": "Espacio de piso reservado, no ocupado", "share": 0.17, "amount": "US$ 0,41 M" }
+      ]
     },
-    {
-        "id": "it",
-        "name": "IT",
-        "term": "Dark Silicon",
-        "color": "#2C5F7C",
-        "observed": "El operador ve racks con LEDs de actividad parpadeando en verde, sugiriendo operación normal. Pero las métricas de utilización muestran CPUs al 12-18% de capacidad real. Servidores con 256 GB de RAM donde solo 40 GB están siendo tocados por los procesos activos. Puertos de red a 100 Gbps con throughput real de 8 Gbps. Almacenamiento NVMe con IOPS provisionados para 500K operaciones por segundo que nunca supera las 60K.",
-        "cost": {
-            "headline": "$1.1M",
-            "unit": "anuales por cada 100 racks con silicon oscuro",
-            "breakdown": [
-                {
-                    "label": "Energía de hardware idle",
-                    "share": 0.40,
-                    "amount": "$0.44M"
-                },
-                {
-                    "label": "Licencias por capacidad no utilizada",
-                    "share": 0.25,
-                    "amount": "$0.275M"
-                },
-                {
-                    "label": "Espacio en piso elevado",
-                    "share": 0.20,
-                    "amount": "$0.22M"
-                },
-                {
-                    "label": "Ciclos de refresh de hardware subutilizado",
-                    "share": 0.15,
-                    "amount": "$0.165M"
-                }
-            ]
-        },
-        "rootCause": "Ciclos de procurement desconectados de la demanda real de workloads. Se compra para picos históricos que nunca se repiten. Over-provisioning como seguro contra incidentes, sin mecanismos de liberación dinámica de recursos. Los equipos de infraestructura IT y los equipos de workloads operan con visibilidad mutua limitada: IT provisiona capacidad, workloads la consumen de forma irregular, y nadie mide la brecha entre ambos.",
-        "metrics": [
-            {
-                "label": "Utilización CPU",
-                "typical": "12–18%",
-                "efficient": "55–70%",
-                "chartable": true
-            },
-            {
-                "label": "Utilización RAM",
-                "typical": "15–25%",
-                "efficient": "60–75%",
-                "chartable": true
-            },
-            {
-                "label": "Throughput de red vs. capacidad",
-                "typical": "5–10%",
-                "efficient": "40–60%",
-                "chartable": true
-            },
-            {
-                "label": "IOPS reales vs. provisionados",
-                "typical": "10–15%",
-                "efficient": "50–70%",
-                "chartable": true
-            }
-        ],
-        "utilization": [
-            {
-                "label": "CPU",
-                "provisioned": 100,
-                "used": 15,
-                "unit": "%"
-            },
-            {
-                "label": "RAM",
-                "provisioned": 256,
-                "used": 40,
-                "unit": "GB"
-            },
-            {
-                "label": "Red",
-                "provisioned": 100,
-                "used": 8,
-                "unit": "Gbps"
-            },
-            {
-                "label": "Almacenamiento (IOPS)",
-                "provisioned": 500000,
-                "used": 60000,
-                "unit": "IOPS"
-            }
-        ]
+    "rootCauses": [
+      "Setpoints y límites de cooling conservadores.",
+      "Topologías UPS/PDU con restricciones locales.",
+      "Planificación de TI no reconciliada con la capacidad física."
+    ],
+    "metrics": [
+      { "label": "PUE", "typical": "1,82", "efficient": "1,35-1,50", "chartable": true },
+      { "label": "Carga IT", "typical": "54 %", "efficient": "70-85 %", "chartable": true },
+      { "label": "Cooling disponible", "typical": "61 %", "efficient": "75-90 %", "chartable": true }
+    ],
+    "metricsCaption": "Indicadores ilustrativos de Idle Megawatts",
+    "signalsIntro": "Qué observan los equipos de operación",
+    "signals": [
+      "Capacidad contratada que no se convierte en carga TI asignable.",
+      "Zonas térmicas con límites de cooling o distribución.",
+      "Headroom físico que no coincide con el plan de capacidad."
+    ],
+    "operationalImpact": {
+      "infrastructure": "La potencia, refrigeración o distribución disponible no admite carga adicional con el nivel de resiliencia requerido.",
+      "economic": "Capital, energía y espacio permanecen comprometidos sin producir capacidad computacional útil."
     },
-    {
-        "id": "workload",
-        "name": "Workload",
-        "term": "Ghost Work",
-        "color": "#7C5C2C",
-        "observed": "El operador ve jobs de entrenamiento de ML que esperan 4-6 horas en cola mientras GPUs A100 reservadas permanecen idle al 95%. El scheduler asigna recursos por proyecto en vez de por demanda real. Workloads batch que corren en horarios de pico eléctrico cuando podrían correr en valle. Reservas de GPUs con ventanas de 8 horas donde el trabajo efectivo dura 90 minutos. Colas de inferencia que se acumulan detrás de jobs de entrenamiento de baja prioridad que nunca se preemptan.",
-        "cost": {
-            "headline": "$3.2M",
-            "unit": "anuales por cada cluster de 500 GPUs con patrones de ghost work",
-            "breakdown": [
-                {
-                    "label": "GPUs reservadas ociosas (compute)",
-                    "share": 0.53,
-                    "amount": "$1.70M"
-                },
-                {
-                    "label": "Energía de GPUs en idle",
-                    "share": 0.14,
-                    "amount": "$0.45M"
-                },
-                {
-                    "label": "Costo de oportunidad de workloads no ejecutados",
-                    "share": 0.21,
-                    "amount": "$0.67M"
-                },
-                {
-                    "label": "Penalizaciones por SLA incumplidos",
-                    "share": 0.12,
-                    "amount": "$0.38M"
-                }
-            ]
-        },
-        "rootCause": "Políticas de scheduling estáticas sin feedback loop con la telemetría del facility. Asignación por reservación sin mecanismos de release automático. Desconexión entre el orquestador de workloads (Kubernetes, Slurm, custom schedulers) y la capa de energía/cooling: el scheduler no sabe que correr un job a las 3 AM reduce el costo de cooling un 22% porque la temperatura ambiente es menor. Los equipos de ML reservan recursos \"por si acaso\" y no los liberan.",
-        "metrics": [
-            {
-                "label": "Utilización GPU",
-                "typical": "5–15%",
-                "efficient": "60–80%",
-                "chartable": true
-            },
-            {
-                "label": "Tiempo en cola vs. ejecución",
-                "typical": "4:1",
-                "efficient": "0.5:1",
-                "chartable": false
-            },
-            {
-                "label": "Ventana de reserva vs. uso efectivo",
-                "typical": "8h / 90min",
-                "efficient": "2h / 100min",
-                "chartable": false
-            },
-            {
-                "label": "Workloads en pico eléctrico",
-                "typical": "70–80%",
-                "efficient": "20–30%",
-                "chartable": true
-            }
-        ],
-        "utilization": [
-            {
-                "label": "GPU",
-                "provisioned": 100,
-                "used": 10,
-                "unit": "%"
-            },
-            {
-                "label": "Ventana de reserva",
-                "provisioned": 480,
-                "used": 90,
-                "unit": "min"
-            }
-        ]
-    }
+    "relatedTerms": ["Power Fragmentation", "Cooling Bottleneck", "Thermal Saturation"],
+    "version": "1.0",
+    "permalink": "#idle-megawatts-node",
+    "lastReview": "Pendiente de validación",
+    "sourceLabel": "Contenido de proyecto",
+    "whatYouSee": "Infraestructura de energía y refrigeración trabajando por debajo de su capacidad útil o desalineada con la demanda real.",
+    "whyItHappens": "Setpoints conservadores, límites de CRAC, topologías UPS/PDU y capacidad de cooling que no se reconcilian con la planificación.",
+    "keyIndicators": "Contrastar telemetría, inventario, reservas y resultados verificables antes de clasificar una pérdida.",
+    "layerRelation": "Una restricción en esta capa puede amplificar pérdidas en las otras dos capas del modelo."
+  },
+  {
+    "id": "it",
+    "name": "Infraestructura TI",
+    "term": "Dark Silicon",
+    "translation": "Silicio oscuro",
+    "color": "#2C5F7C",
+    "tag": "IT",
+    "code": "IT-001",
+    "observed": "Servidores encendidos, parcheados y facturados que procesan una fracción mínima de su capacidad de cómputo disponible, permaneciendo \"apagados\" en términos de trabajo útil.",
+    "cost": {
+      "headline": "US$ 1,1 M",
+      "unit": "anuales por cada 1.000 servidores subutilizados · Estimación del contenido de proyecto.",
+      "breakdown": [
+        { "label": "Licenciamiento y soporte de cómputo ocioso", "share": 0.46, "amount": "US$ 0,51 M" },
+        { "label": "Energía de servidores subutilizados", "share": 0.34, "amount": "US$ 0,37 M" },
+        { "label": "Sobreaprovisionamiento de red y almacenamiento", "share": 0.20, "amount": "US$ 0,22 M" }
+      ]
+    },
+    "rootCauses": [
+      "Asignación de recursos por reserva estática en vez de uso real.",
+      "Límites térmicos que impiden activar todos los núcleos simultáneamente.",
+      "Clústers dimensionados para el peor caso, no para la demanda típica."
+    ],
+    "metrics": [
+      { "label": "Utilización de CPU", "typical": "12-24 %", "efficient": "55-70 %", "chartable": true },
+      { "label": "Núcleos activos", "typical": "60-75 %", "efficient": "90-98 %", "chartable": true },
+      { "label": "Servidores comatosos", "typical": "8-15 %", "efficient": "< 2 %", "chartable": false }
+    ],
+    "metricsCaption": "Indicadores ilustrativos de Dark Silicon",
+    "signalsIntro": "Qué observan los equipos de plataforma",
+    "signals": [
+      "Servidores con tráfico de red cercano a cero durante semanas.",
+      "Clústers dimensionados para el peor caso, subutilizados en operación normal.",
+      "Núcleos inactivos por límites térmicos del chasis."
+    ],
+    "operationalImpact": {
+      "infrastructure": "El cómputo físicamente disponible no se traduce en capacidad asignable para nuevas cargas.",
+      "economic": "Licenciamiento, soporte y energía se pagan sobre capacidad que nunca se ejecuta."
+    },
+    "relatedTerms": ["Zombie Server", "Thermal Throttling", "Static Overprovisioning"],
+    "version": "1.0",
+    "permalink": "#dark-silicon-node",
+    "lastReview": "Pendiente de validación",
+    "sourceLabel": "Contenido de proyecto",
+    "whatYouSee": "Servidores encendidos y facturados que procesan una fracción mínima de su capacidad de cómputo disponible.",
+    "whyItHappens": "Reserva estática de recursos, límites térmicos del chasis y clústers dimensionados para el peor caso en vez del uso típico.",
+    "keyIndicators": "Cruzar utilización de CPU con tráfico de red real antes de clasificar un servidor como ocioso.",
+    "layerRelation": "Cómputo varado en esta capa suele originarse en sobreaprovisionamiento de instalaciones o en cargas de trabajo mal dimensionadas."
+  },
+  {
+    "id": "workload",
+    "name": "Cargas de trabajo",
+    "term": "Ghost Work",
+    "translation": "Trabajo fantasma",
+    "color": "#7C5C2C",
+    "tag": "WORKLOAD",
+    "code": "WLD-001",
+    "observed": "Trabajo computacional que se ejecuta, consume ciclos y genera costo, pero no produce valor de negocio: jobs huérfanos, entornos de prueba olvidados y pipelines sin consumidor final.",
+    "cost": {
+      "headline": "US$ 3,2 M",
+      "unit": "anuales por cada 500 pipelines activos · Estimación del contenido de proyecto.",
+      "breakdown": [
+        { "label": "Cómputo de entornos no productivos abandonados", "share": 0.41, "amount": "US$ 1,31 M" },
+        { "label": "Pipelines de datos sin consumidor final", "share": 0.35, "amount": "US$ 1,12 M" },
+        { "label": "Reintentos y jobs zombis", "share": 0.24, "amount": "US$ 0,77 M" }
+      ]
+    },
+    "rootCauses": [
+      "Falta de trazabilidad entre quién solicita un job y quién lo consume.",
+      "Entornos de prueba que nunca se dan de baja tras su ciclo de vida.",
+      "Reintentos automáticos sin límite ante fallas transitorias."
+    ],
+    "metrics": [
+      { "label": "Jobs sin consumidor", "typical": "18-28 %", "efficient": "< 5 %", "chartable": true },
+      { "label": "Entornos > 90 días", "typical": "22 %", "efficient": "< 5 %", "chartable": true },
+      { "label": "Costo por reintentos", "typical": "6-10 %", "efficient": "< 1 %", "chartable": false }
+    ],
+    "metricsCaption": "Indicadores ilustrativos de Ghost Work",
+    "signalsIntro": "Qué observan los equipos de datos",
+    "signals": [
+      "Pipelines cuyo output nadie consume río abajo.",
+      "Jobs en reintento continuo sin resolución de la falla original.",
+      "Entornos de prueba activos meses después de su propósito original."
+    ],
+    "operationalImpact": {
+      "infrastructure": "El scheduler sigue asignando cómputo a trabajo que no tiene consumidor ni dueño identificado.",
+      "economic": "El costo por ciclo de cómputo queda desacoplado de cualquier valor de negocio verificable."
+    },
+    "relatedTerms": ["Orphan Job", "Zombie Pipeline", "Retry Storm"],
+    "version": "1.0",
+    "permalink": "#ghost-work-node",
+    "lastReview": "Pendiente de validación",
+    "sourceLabel": "Contenido de proyecto",
+    "whatYouSee": "Cómputo que se ejecuta y factura sin producir un resultado que otra parte del negocio consuma.",
+    "whyItHappens": "Falta de trazabilidad entre solicitante y consumidor, entornos de prueba sin fecha de baja, y reintentos automáticos sin límite.",
+    "keyIndicators": "Cruzar linaje de datos y logs del scheduler para confirmar si un job tiene consumidor real.",
+    "layerRelation": "El trabajo fantasma suele heredar ineficiencias de las capas de instalaciones e infraestructura TI, amplificando su costo."
+  }
 ]

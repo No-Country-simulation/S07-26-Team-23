@@ -22,7 +22,8 @@
 
   /* Bordes y Fondos */
   --color-border-default: #D3D1C7; /* Mist */
-  --color-bg-page: #FAFAFA;        /* Page background */
+  --color-bg-page: #FAFAF8;        /* Page background */
+  --color-bg-card: #FFFFFF;        /* Card background */
   --color-bg-subtle: #F1EFE8;      /* Cloud background */
 
   /* Radio de Bordes (Restricción de UX) */

@@ -26,13 +26,6 @@ const costBreakdownSchema = z.object({
     ),
 });
 
-const utilizationSchema = z.object({
-    label: z.string(),
-    provisioned: z.number(),
-    used: z.number(),
-    unit: z.string(),
-});
-
 const metricSchema = z.object({
     label: z.string(), // Corregido de name a label
     typical: z.string(),
@@ -40,16 +33,36 @@ const metricSchema = z.object({
     chartable: z.boolean(),
 });
 
+const operationalImpactSchema = z.object({
+    infrastructure: z.string(),
+    economic: z.string(),
+});
+
 const layerSchema = z.object({
     id: z.string(),
     name: z.string(),
     term: z.string(),
+    translation: z.string(),
     color: z.string(),
+    tag: z.string(),
+    code: z.string(),
     observed: z.string(), // Acepta texto descriptivo detallado
     cost: costBreakdownSchema,
-    rootCause: z.string(),
+    rootCauses: z.array(z.string()),
     metrics: z.array(metricSchema),
-    utilization: z.array(utilizationSchema),
+    metricsCaption: z.string(),
+    signalsIntro: z.string(),
+    signals: z.array(z.string()),
+    operationalImpact: operationalImpactSchema,
+    relatedTerms: z.array(z.string()),
+    version: z.string(),
+    permalink: z.string(),
+    lastReview: z.string(),
+    sourceLabel: z.string(),
+    whatYouSee: z.string(),
+    whyItHappens: z.string(),
+    keyIndicators: z.string(),
+    layerRelation: z.string(),
 });
 
 const taxonomySchema = z.array(layerSchema);

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import TableOfContents from "./components/TableOfContents";
+import TableOfContents from "@/components/TableOfContents";
+import ReportHeader from "@/components/ReportHeader";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -45,16 +47,22 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex antialiased">
-        {/* Aquí ponemos nuestro menú lateral dinámico */}
-        <TableOfContents />
+      <body className="min-h-screen flex flex-col antialiased">
+        <ReportHeader />
 
-        {/* Aquí es donde se dibuja el contenido central (page.tsx) */}
-        <main className="flex-1 flex justify-center">
-          <div className="w-full max-w-[700px] px-6 md:px-24">
-            {children}
-          </div>
-        </main>
+        <div className="flex flex-1">
+          {/* Aquí ponemos nuestro menú lateral dinámico */}
+          <TableOfContents />
+
+          {/* Aquí es donde se dibuja el contenido central (page.tsx) */}
+          <main className="flex-1 flex justify-center">
+            <div className="w-full max-w-[850px] px-6 md:px-24">
+              {children}
+            </div>
+          </main>
+        </div>
+
+        <Footer />
       </body>
     </html>
   );

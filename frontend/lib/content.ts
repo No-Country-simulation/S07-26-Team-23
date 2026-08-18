@@ -8,6 +8,13 @@ export interface ReportSection {
   label: string;
   title: string;
   content: string;
+  subtitle?: string;
+  author?: string;
+  version?: string;
+  readTime?: string;
+  refCode?: string;
+  includes?: string;
+  excludes?: string;
 }
 
 const contentDirectory = path.join(process.cwd(), "content");
@@ -28,6 +35,13 @@ export function getReportSections(): ReportSection[] {
       label,
       title: typeof data.title === "string" ? data.title : label,
       content: content.trim(),
+      subtitle: typeof data.subtitle === "string" ? data.subtitle : undefined,
+      author: typeof data.author === "string" ? data.author : undefined,
+      version: typeof data.version === "string" ? data.version : undefined,
+      readTime: typeof data.readTime === "string" ? data.readTime : undefined,
+      refCode: typeof data.refCode === "string" ? data.refCode : undefined,
+      includes: typeof data.includes === "string" ? data.includes : undefined,
+      excludes: typeof data.excludes === "string" ? data.excludes : undefined,
     };
   });
 }

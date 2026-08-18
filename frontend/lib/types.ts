@@ -24,16 +24,36 @@ export interface UtilizationItem {
     unit: string;
 }
 
+export interface OperationalImpact {
+    infrastructure: string;
+    economic: string;
+}
+
 export interface TaxonomyLayer {
     id: string;
     name: string;
     term: string;
+    translation: string;
     color: string;
+    tag: string;
+    code: string;
     observed: string;
     cost: CostData;
-    rootCause: string;
+    rootCauses: string[];
     metrics: Metric[];
-    utilization: UtilizationItem[];
+    metricsCaption: string;
+    signalsIntro: string;
+    signals: string[];
+    operationalImpact: OperationalImpact;
+    relatedTerms: string[];
+    version: string;
+    permalink: string;
+    lastReview: string;
+    sourceLabel: string;
+    whatYouSee: string;
+    whyItHappens: string;
+    keyIndicators: string;
+    layerRelation: string;
 }
 
 export interface MethodologyFramework {
