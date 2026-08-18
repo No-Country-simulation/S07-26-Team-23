@@ -3,8 +3,13 @@
 import { useState } from "react";
 
 interface DownloadableAssetProps {
+<<<<<<< HEAD
     title?: string;
     description?: string;
+=======
+    title: string;
+    description: string;
+>>>>>>> ee0f3ef (Implement DownloadableAsset component)
     fileUrl?: string;
     fileSize?: string;
 }
@@ -13,8 +18,13 @@ const ATTRIBUTION = "Source: PhysaFlow Stranded Capacity Index";
 const DEFAULT_FILE_URL = "/downloads/physaflow-report-facility.pdf";
 
 export default function DownloadableAsset({
+<<<<<<< HEAD
     title = "Descargar el reporte completo",
     description = "Descarga la version editorial completa del Indice de Capacidad Varada en PDF.",
+=======
+    title,
+    description,
+>>>>>>> ee0f3ef (Implement DownloadableAsset component)
     fileUrl = DEFAULT_FILE_URL,
     fileSize,
 }: DownloadableAssetProps) {
