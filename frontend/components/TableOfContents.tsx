@@ -1,17 +1,48 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { REPORT_SECTIONS } from "@/lib/report-sections";
 
+interface TocItem {
+  id: string;
+  label: string;
+  href: string;
+  type: "section" | "page";
+}
+
+const tocItems: TocItem[] = [
+  ...REPORT_SECTIONS.filter((section) => section.id !== "citas").map((section) => ({
+    id: section.id,
+    label: section.label,
+    href: `/reporte#${section.id}`,
+    type: "section" as const,
+  })),
+  { id: "pdf", label: "PDF", href: "/reporte/pdf", type: "page" },
+  { id: "como-citar", label: "Cómo citar", href: "/reporte/como-citar", type: "page" },
+];
+
 export default function TableOfContents() {
-  const [activeId, setActiveId] = useState<string>(REPORT_SECTIONS[0].id);
+  const pathname = usePathname();
+  const [observedActiveId, setObservedActiveId] = useState<string>(REPORT_SECTIONS[0].id);
+  const routeActiveId =
+    pathname === "/reporte/pdf"
+      ? "pdf"
+      : pathname === "/reporte/como-citar"
+        ? "como-citar"
+        : undefined;
+  const activeId = routeActiveId || observedActiveId;
 
   useEffect(() => {
+    if (routeActiveId) {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
+            setObservedActiveId(entry.target.id);
           }
         });
       },
@@ -20,13 +51,13 @@ export default function TableOfContents() {
       }
     );
 
-    REPORT_SECTIONS.forEach((section) => {
+    tocItems.filter((section) => section.type === "section").forEach((section) => {
       const el = document.getElementById(section.id);
       if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [routeActiveId]);
 
   return (
     <aside
@@ -42,13 +73,13 @@ export default function TableOfContents() {
           Contenido
         </p>
         <ul className="flex flex-col gap-3">
-          {REPORT_SECTIONS.map((section, index) => {
+          {tocItems.map((section, index) => {
             const isActive = activeId === section.id;
             const number = String(index + 1).padStart(2, "0");
             return (
               <li key={section.id}>
                 <a
-                  href={`#${section.id}`}
+                  href={section.href}
                   className={`flex items-baseline gap-2.5 pl-2.5 border-l-2 transition-colors duration-200 ${
                     isActive
                       ? "border-[var(--color-brand-primary)]"
