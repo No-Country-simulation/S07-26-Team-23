@@ -29,6 +29,11 @@ export interface OperationalImpact {
     economic: string;
 }
 
+export interface IllustrativeFigure {
+    title: string;
+    percentage: number;
+}
+
 export interface TaxonomyLayer {
     id: string;
     name: string;
@@ -54,6 +59,7 @@ export interface TaxonomyLayer {
     whyItHappens: string;
     keyIndicators: string;
     layerRelation: string;
+    illustrativeFigure: IllustrativeFigure;
 }
 
 export interface MethodologyFramework {

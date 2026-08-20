@@ -1,48 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { REPORT_SECTIONS } from "@/lib/report-sections";
 
 interface TocItem {
   id: string;
   label: string;
   href: string;
-  type: "section" | "page";
 }
 
-const tocItems: TocItem[] = [
-  ...REPORT_SECTIONS.filter((section) => section.id !== "citas").map((section) => ({
+const tocItems: TocItem[] = REPORT_SECTIONS.filter((section) => section.id !== "citas").map(
+  (section) => ({
     id: section.id,
     label: section.label,
     href: `/reporte#${section.id}`,
-    type: "section" as const,
-  })),
-  { id: "pdf", label: "PDF", href: "/reporte/pdf", type: "page" },
-  { id: "como-citar", label: "Cómo citar", href: "/reporte/como-citar", type: "page" },
-];
+  })
+);
 
 export default function TableOfContents() {
-  const pathname = usePathname();
-  const [observedActiveId, setObservedActiveId] = useState<string>(REPORT_SECTIONS[0].id);
-  const routeActiveId =
-    pathname === "/reporte/pdf"
-      ? "pdf"
-      : pathname === "/reporte/como-citar"
-        ? "como-citar"
-        : undefined;
-  const activeId = routeActiveId || observedActiveId;
+  const [activeId, setActiveId] = useState<string>(REPORT_SECTIONS[0].id);
 
   useEffect(() => {
-    if (routeActiveId) {
-      return;
-    }
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setObservedActiveId(entry.target.id);
+            setActiveId(entry.target.id);
           }
         });
       },
@@ -51,17 +34,17 @@ export default function TableOfContents() {
       }
     );
 
-    tocItems.filter((section) => section.type === "section").forEach((section) => {
+    tocItems.forEach((section) => {
       const el = document.getElementById(section.id);
       if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
-  }, [routeActiveId]);
+  }, []);
 
   return (
     <aside
-      className="w-[320px] shrink-0 h-screen sticky top-0 border-r border-[var(--color-border-default)] hidden md:block"
+      className="w-[320px] shrink-0 h-[calc(100vh-4rem)] sticky top-16 border-r border-[var(--color-border-default)] hidden md:block"
       style={{
         paddingTop: "52px",
         paddingLeft: "32px",

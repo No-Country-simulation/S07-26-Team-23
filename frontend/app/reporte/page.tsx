@@ -1,8 +1,8 @@
 import { getReportSections } from "@/lib/content";
-import { getTaxonomy, getMethodology, getCitations } from "@/lib/data";
+import { getTaxonomy, getMethodology } from "@/lib/data";
 import TaxonomyNodeCard from "@/components/TaxonomyNodeCard";
 import TaxonomyReferenceCard from "@/components/TaxonomyReferenceCard";
-import CitationBlock from "@/components/CitationBlock";
+import LayerFigure from "@/components/LayerFigure";
 import DownloadableAsset from "@/components/DownloadableAsset";
 import DefinitionCard from "@/components/DefinitionCard";
 
@@ -74,13 +74,11 @@ export default function ReportePage() {
   const sections = getReportSections();
   const taxonomy = getTaxonomy();
   const methodology = getMethodology();
-  const citations = getCitations();
 
   const introduccion = sections.find((s) => s.id === "introduccion");
   const taxonomia = sections.find((s) => s.id === "taxonomia");
   const metodologia = sections.find((s) => s.id === "metodologia");
   const limitaciones = sections.find((s) => s.id === "limitaciones");
-  const citas = sections.find((s) => s.id === "citas");
   const referencias = sections.find((s) => s.id === "referencias");
 
   return (
@@ -126,7 +124,7 @@ export default function ReportePage() {
       {taxonomia && (
         <section id="taxonomia">
           <Block>
-            <Eyebrow number={2} label="Definición" />
+            <Eyebrow number={1} label="Definición" />
             <h2 className="text-3xl font-serif font-bold text-[var(--color-brand-primary)] mt-1">
               {taxonomia.title}
             </h2>
@@ -144,7 +142,7 @@ export default function ReportePage() {
 
           {/* 03 · Taxonomía general — comparativa de capas */}
           <Block>
-            <Eyebrow number={3} label="Taxonomía general" />
+            <Eyebrow number={2} label="Taxonomía general" />
             <h2 className="text-3xl font-serif font-bold text-[var(--color-brand-primary)] mt-1">
               Tres capas, un mismo sistema.
             </h2>
@@ -227,6 +225,10 @@ export default function ReportePage() {
               <div className="pt-4">
                 <TaxonomyNodeCard layer={layer} />
               </div>
+
+              <div className="pt-4">
+                <LayerFigure layer={layer} number={number} />
+              </div>
             </Block>
           </section>
         );
@@ -303,28 +305,11 @@ export default function ReportePage() {
         </section>
       )}
 
-      {/* 08 · Cómo citar */}
-      {citas && (
-        <section id="citas">
-          <Block>
-            <Eyebrow number={8} label="Cómo citar" />
-            <h2 className="text-3xl font-serif font-bold text-[var(--color-brand-primary)] mt-1">
-              {citas.title}
-            </h2>
-            {citas.content && <Prose content={citas.content} />}
-            <CitationBlock
-              academic={citations.academic}
-              journalistic={citations.journalistic}
-            />
-          </Block>
-        </section>
-      )}
-
-      {/* 09 · Referencias */}
+      {/* 08 · Referencias */}
       {referencias && (
         <section id="referencias">
           <Block>
-            <Eyebrow number={9} label="Referencias" />
+            <Eyebrow number={8} label="Referencias" />
             <h2 className="text-3xl font-serif font-bold text-[var(--color-brand-primary)] mt-1">
               {referencias.title}
             </h2>

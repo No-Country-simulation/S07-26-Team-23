@@ -32,6 +32,10 @@
   --radius-lg: 8px;
 }
 
+html {
+  scroll-padding-top: 4rem; /* alto de la barra superior fija */
+}
+
 body {
   background-color: var(--color-bg-page);
   color: var(--color-text-primary);
