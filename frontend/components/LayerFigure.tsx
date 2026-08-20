@@ -6,7 +6,7 @@ interface LayerFigureProps {
 }
 
 export default function LayerFigure({ layer, number }: LayerFigureProps) {
-  const { title, percentage } = layer.illustrativeFigure;
+  const { title = "", percentage = 0 } = layer.illustrativeFigure || {};
   const usable = 100 - percentage;
   const figureId = String(number).padStart(2, "0");
 
