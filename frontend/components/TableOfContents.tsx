@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { REPORT_SECTIONS } from "@/lib/report-sections";
+import { REPORT_SECTIONS } from "../lib/report-sections";
 
 interface TocItem {
   id: string;

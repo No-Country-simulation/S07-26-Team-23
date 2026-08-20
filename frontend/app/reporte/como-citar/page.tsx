@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
 import CitationCopyCard from "./CitationCopyCard";
-import type { CitationsData } from "@/lib/types";
+import type { CitationsData } from "../../../lib/types";
 
 export const metadata: Metadata = {
   title: "Cómo citar este informe — PhysaFlow",

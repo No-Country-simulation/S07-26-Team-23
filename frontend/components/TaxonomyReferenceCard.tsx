@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { TaxonomyLayer } from "@/lib/types";
+import type { TaxonomyLayer } from "../lib/types";
 
 interface TaxonomyReferenceCardProps {
   layer: TaxonomyLayer;

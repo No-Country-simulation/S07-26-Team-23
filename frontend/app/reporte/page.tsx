@@ -1,10 +1,10 @@
-import { getReportSections } from "@/lib/content";
-import { getTaxonomy, getMethodology } from "@/lib/data";
-import TaxonomyNodeCard from "@/components/TaxonomyNodeCard";
-import TaxonomyReferenceCard from "@/components/TaxonomyReferenceCard";
-import LayerFigure from "@/components/LayerFigure";
-import DownloadableAsset from "@/components/DownloadableAsset";
-import DefinitionCard from "@/components/DefinitionCard";
+import { getReportSections } from "../../lib/content";
+import { getTaxonomy, getMethodology } from "../../lib/data";
+import TaxonomyNodeCard from "../../components/TaxonomyNodeCard";
+import TaxonomyReferenceCard from "../../components/TaxonomyReferenceCard";
+import LayerFigure from "../../components/LayerFigure";
+import DownloadableAsset from "../../components/DownloadableAsset";
+import DefinitionCard from "../../components/DefinitionCard";
 
 const LAYER_IDS = ["facility", "it", "workload"];
 

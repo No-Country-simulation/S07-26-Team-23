@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LAYER_DOWNLOADS } from "@/lib/downloads";
+import { LAYER_DOWNLOADS } from "../../../lib/downloads";
 
 export const metadata: Metadata = {
   title: "Descargar reporte — PhysaFlow",

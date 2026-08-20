@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import TableOfContents from "@/components/TableOfContents";
-import ReportHeader from "@/components/ReportHeader";
-import Footer from "@/components/Footer";
+import TableOfContents from "../components/TableOfContents";
+import ReportHeader from "../components/ReportHeader";
+import Footer from "../components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {

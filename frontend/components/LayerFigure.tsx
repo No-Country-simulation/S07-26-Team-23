@@ -1,4 +1,4 @@
-import type { TaxonomyLayer } from "@/lib/types";
+import type { TaxonomyLayer } from "../lib/types";
 
 interface LayerFigureProps {
   layer: TaxonomyLayer;
