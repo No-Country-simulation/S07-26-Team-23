@@ -3,72 +3,68 @@
 import { useState } from "react";
 
 interface DownloadableAssetProps {
-<<<<<<< HEAD
-    title?: string;
-    description?: string;
-=======
-    title: string;
-    description: string;
->>>>>>> ee0f3ef (Implement DownloadableAsset component)
-    fileUrl?: string;
-    fileSize?: string;
+  title?: string;
+  description?: string;
+  fileUrl?: string;
+  fileSize?: string;
 }
 
 const ATTRIBUTION = "Source: PhysaFlow Stranded Capacity Index";
 const DEFAULT_FILE_URL = "/downloads/physaflow-report-facility.pdf";
 
 export default function DownloadableAsset({
-<<<<<<< HEAD
-    title = "Descargar el reporte completo",
-    description = "Descarga la version editorial completa del Indice de Capacidad Varada en PDF.",
-=======
-    title,
-    description,
->>>>>>> ee0f3ef (Implement DownloadableAsset component)
-    fileUrl = DEFAULT_FILE_URL,
-    fileSize,
+  title = "Descargar el reporte completo",
+  description = "Obtén la documentación técnica y el análisis detallado de la capacidad varada en PDF.",
+  fileUrl = DEFAULT_FILE_URL,
+  fileSize = "2.4 MB",
 }: DownloadableAssetProps) {
-    const [isDownloading, setIsDownloading] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
-    const handleDownload = () => {
-        setIsDownloading(true);
-        window.setTimeout(() => setIsDownloading(false), 900);
-    };
+  const handleDownload = () => {
+    setIsDownloading(true);
+    setTimeout(() => setIsDownloading(false), 2000);
+  };
 
-    return (
-        <div className="group flex flex-col gap-5 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-subtle)] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-brand-primary)] hover:shadow-[0_14px_34px_rgba(27,77,62,0.10)]">
-            <div className="flex flex-col gap-2">
-                <span className="font-mono text-xs font-semibold uppercase text-[var(--color-brand-accent)]">
-                    PDF descargable
-                </span>
-                <h3 className="text-xl font-serif font-bold text-[var(--color-text-primary)]">
-                    {title}
-                </h3>
-                <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
-                    {description}
-                </p>
-            </div>
-
-            <div className="flex flex-col gap-3 border-t border-[var(--color-border-default)] pt-4 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex flex-col gap-1">
-                    <span className="font-mono text-xs font-medium uppercase text-[var(--color-text-secondary)]">
-                        {fileSize ? `PDF - ${fileSize}` : "PDF"}
-                    </span>
-                    <span className="font-mono text-[11px] text-[var(--color-text-secondary)]">
-                        {ATTRIBUTION}
-                    </span>
-                </div>
-
-                <a
-                    href={fileUrl}
-                    download
-                    onClick={handleDownload}
-                    aria-busy={isDownloading}
-                    className="inline-flex h-11 items-center justify-center rounded-md border border-[var(--color-brand-primary)] bg-[var(--color-brand-primary)] px-4 font-mono text-xs font-semibold uppercase text-white transition-colors duration-200 hover:bg-[#153D32] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-accent)] focus:ring-offset-2 aria-busy:pointer-events-none aria-busy:opacity-75"
-                >
-                    {isDownloading ? "Preparando..." : "Descargar PDF"}
-                </a>
-            </div>
+  return (
+    <div className="my-8 rounded-xl border border-border bg-card p-6 shadow-sm transition-all hover:border-accent/40">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="space-y-1">
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Recurso Descargable
+          </span>
+          <h3 className="text-lg font-bold text-foreground">{title}</h3>
+          <p className="text-sm text-muted-foreground">{description}</p>
+          <p className="text-xs italic text-muted-foreground/80 pt-1">{ATTRIBUTION}</p>
         </div>
-    );
+
+        <a
+          href={fileUrl}
+          download
+          onClick={handleDownload}
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:pointer-events-none disabled:opacity-50 shrink-0"
+        >
+          {isDownloading ? (
+            <span>Descargando...</span>
+          ) : (
+            <>
+              <svg
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                />
+              </svg>
+              <span>PDF ({fileSize})</span>
+            </>
+          )}
+        </a>
+      </div>
+    </div>
+  );
 }
