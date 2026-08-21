@@ -2,6 +2,10 @@
   {
     "id": "facility",
     "name": "Instalaciones",
+    "illustrativeFigure": {
+      "title": "Eficiencia de Instalaciones",
+      "percentage": 39
+    },
     "term": "Idle Megawatts",
     "translation": "Megavatios inactivos",
     "color": "#1B4D3E",
@@ -51,6 +55,10 @@
   {
     "id": "it",
     "name": "Infraestructura TI",
+    "illustrativeFigure": {
+      "title": "Eficiencia de Infraestructura",
+      "percentage": 25
+    },
     "term": "Dark Silicon",
     "translation": "Silicio oscuro",
     "color": "#2C5F7C",
@@ -100,6 +108,10 @@
   {
     "id": "workload",
     "name": "Cargas de trabajo",
+    "illustrativeFigure": {
+      "title": "Eficiencia de Cargas",
+      "percentage": 18
+    },
     "term": "Ghost Work",
     "translation": "Trabajo fantasma",
     "color": "#7C5C2C",
